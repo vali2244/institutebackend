@@ -9,7 +9,7 @@ res.status(200).json({
     new_data
 })
 } catch (error) {
-    console.log(error=error)
+
     res.status(500).json({success:false,error})
 }
 
