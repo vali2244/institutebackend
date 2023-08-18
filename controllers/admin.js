@@ -17,10 +17,12 @@ exports.admin_create=async(req,res)=>{
 exports.admin_login=async(req,res)=>{
     try {
         const {email,password}=req.body
-        const admin=await  Admin.find({"email":email})
-        if(admin.length>0){
-            const verify_admin=await Admin.find({"email":email,"passoword":password})
-            if(verify_admin.length>0){
+        const admin=await  Admin.findOne({email})
+        console.log(admin)
+        if(admin){
+            const verify_admin=await Admin.findOne({email,password})
+            console.log(verify_admin)
+            if(verify_admin){
                 res.status(200).json({success:true,
                 verify_admin})
             }
@@ -43,7 +45,7 @@ exports.admin_login=async(req,res)=>{
 
 
     } catch (error) {
-        console.log(error=error)
+       
         res.status(500).json({success:false,error})
     }
 }
